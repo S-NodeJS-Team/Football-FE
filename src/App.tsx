@@ -1,25 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import { Space, Layout, Button } from "antd";
+import HeaderContent from "./layout/HeaderContent";
+
+const { Header, Footer, Sider, Content } = Layout;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Space direction="vertical" style={{ width: "100%" }} size={[0, 48]}>
+      <Layout>
+        <Header>
+          <HeaderContent />
+        </Header>
+      </Layout>
+
+      <Layout>
+        <Content></Content>
+      </Layout>
+
+      <Layout>
+        <Footer></Footer>
+      </Layout>
+    </Space>
   );
 }
 

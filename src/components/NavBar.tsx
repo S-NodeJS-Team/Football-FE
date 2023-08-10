@@ -14,18 +14,18 @@ import { useNavigate } from "react-router-dom";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Home as HomeIconMui } from "@mui/icons-material";
 import UserIcon from "./common/UserIcon";
-import { useAppDispatch } from "../hooks/redux-hooks";
+import { useAppDispatch, useAppSelector } from "../hooks/redux-hooks";
 import { openLoginForm } from "../stores/commonSlice";
 import LoginFormDialog from "./auth/login/LoginFormDialog";
 import RegisterMenu from "./auth/register/RegisterMenu";
 
 interface INavBarProps {}
 
-const currUser = null;
 
 const NavBar: React.FunctionComponent<INavBarProps> = (props) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const currUser = useAppSelector((state) => state.user.currUser)
 
   const [anchorUserMenu, setAnchorUserMenu] =
     React.useState<null | HTMLElement>(null);

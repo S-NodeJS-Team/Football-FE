@@ -4,9 +4,12 @@ import PublicPage from "./layout/PublicPage";
 import { useRoutes } from "react-router-dom";
 import RegisterPage from "./pages/RegisterPage";
 import BecomeOrganizerPage from "./pages/BecomeOrganizerPage";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+import VerifyAccountPage from "./pages/VerifyAccountPage";
 
 function App() {
-  const mainRoutes = {
+  const homeRoutes = {
     path: "/",
     element: <PublicPage />,
     children: [
@@ -21,8 +24,29 @@ function App() {
     ],
   };
 
-  const routing = useRoutes([mainRoutes]);
-  return <>{routing}</>;
+  const publicRoutes = {
+    path: "auth/verify-account",
+    element: <VerifyAccountPage />,
+  };
+
+  const routing = useRoutes([homeRoutes, publicRoutes]);
+  return (
+    <>
+      {routing}
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+    </>
+  );
 }
 
 export default App;

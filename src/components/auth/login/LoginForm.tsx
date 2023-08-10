@@ -4,7 +4,20 @@ import { Form, useFormik, FormikProvider } from "formik";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { LoadingButton } from "@mui/lab";
-import { DialogContent, IconButton, Stack, TextField } from "@mui/material";
+import {
+  DialogContent,
+  IconButton,
+  Stack,
+  TextField,
+  Link,
+} from "@mui/material";
+import { signInService } from "../../../apis/auth.api";
+import { toast } from "react-toastify";
+import { useAppDispatch } from "../../../hooks/redux-hooks";
+import { openLoginForm } from "../../../stores/commonSlice";
+import { login } from "../../../stores/userSlice";
+import { ISignInResponse } from "../../../interfaces/auth";
+import { Link as ReactLink } from "react-router-dom";
 
 interface ILoginFormProps {}
 
@@ -14,27 +27,52 @@ const loginFormValidation = Yup.object({
 });
 
 const LoginForm: React.FunctionComponent<ILoginFormProps> = (props) => {
-
   const [showPassword, setShowPassword] = React.useState<boolean>(false);
-
-  const handleShowPassword = () => setShowPassword(!showPassword)
+  const dispatch = useAppDispatch();
+  const handleShowPassword = () => setShowPassword(!showPassword);
 
   const loginFormik = useFormik({
     initialValues: {
-        email: "",
-        password: "",
+      email: "",
+      password: "",
     },
     validationSchema: loginFormValidation,
     onSubmit: async (values, actions) => {
-        try {
-            
-        } catch (error) {
-            
-        }
-    }
-  })
+      try {
+        const res: ISignInResponse = await signInService(values);
 
-  const { errors, touched, isSubmitting, handleSubmit, getFieldProps} = loginFormik;
+        if (res.code !== 200) {
+          toast.error(res.message);
+
+          return;
+        }
+        dispatch(openLoginForm(false));
+        dispatch(login(res.data.user));
+
+        localStorage.setItem(
+          "access_token",
+          JSON.stringify(res.data.access_token)
+        );
+
+        toast.success(res.message);
+
+        actions.resetForm();
+      } catch (error: any) {
+        const { message } = error.response.data;
+
+        if (Array.isArray(message)) {
+          message.forEach((element) => {
+            toast.error(element);
+          });
+        }
+
+        toast.error(message);
+      }
+    },
+  });
+
+  const { errors, touched, isSubmitting, handleSubmit, getFieldProps } =
+    loginFormik;
 
   return (
     <FormikProvider value={loginFormik}>
@@ -68,11 +106,16 @@ const LoginForm: React.FunctionComponent<ILoginFormProps> = (props) => {
             />
           </Stack>
 
+          <Link component={ReactLink} to="/forgot-password">
+            Forgot password
+          </Link>
+
           <LoadingButton
             fullWidth
             variant="contained"
             loading={isSubmitting}
             type="submit"
+            sx={{ mt: 2 }}
           >
             Login
           </LoadingButton>

@@ -2,6 +2,8 @@ import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import { ListItemIcon, Menu, MenuItem } from "@mui/material";
 import { Logout, Settings } from "@mui/icons-material";
+import { useAppDispatch } from "../../hooks/redux-hooks";
+import { logout } from "../../stores/userSlice";
 
 interface IUserMenuProps {
   anchorUserMenu: null | HTMLElement;
@@ -13,12 +15,14 @@ const UserMenu: React.FunctionComponent<IUserMenuProps> = ({
   anchorUserMenu,
 }) => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const handleCloseUserMenu = () => {
     setAnchorUserMenu(null);
   };
 
   const handleLogout = () => {
+    dispatch(logout())
     navigate("/");
   };
 

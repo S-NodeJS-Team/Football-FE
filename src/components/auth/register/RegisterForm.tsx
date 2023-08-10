@@ -2,6 +2,7 @@ import * as React from "react";
 import { IconButton, Stack, TextField, Typography } from "@mui/material";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import MuiPhoneNumber from "material-ui-phone-number";
 
 interface IRegisterFormProps {
   formik: any;
@@ -45,6 +46,17 @@ const RegisterForm: React.FunctionComponent<IRegisterFormProps> = ({
             {...getFieldProps("email")}
             error={Boolean(touched.email && errors.email)}
             helperText={touched.email && errors.email}
+          />
+        </Stack>
+
+        <Stack>
+          <MuiPhoneNumber
+            fullWidth
+            defaultCountry={"de"}
+            value={formik.values.phoneNumber}
+            onChange={(value) => formik.setFieldValue("phoneNumber", value)}
+            error={formik.touched.phoneNumber && Boolean(formik.errors.phoneNumber)}
+            helperText={formik.touched.phoneNumber && formik.errors.phoneNumber}
           />
         </Stack>
 

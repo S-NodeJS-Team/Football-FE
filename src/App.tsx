@@ -7,6 +7,8 @@ import BecomeOrganizerPage from "./pages/BecomeOrganizerPage";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import VerifyAccountPage from "./pages/VerifyAccountPage";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
+import UpdatePasswordPage from "./pages/UpdatePasswordPage";
 
 function App() {
   const homeRoutes = {
@@ -24,12 +26,22 @@ function App() {
     ],
   };
 
-  const publicRoutes = {
-    path: "auth/verify-account",
-    element: <VerifyAccountPage />,
-  };
+  const publicRoutes = [
+    {
+      path: "auth/verify-account",
+      element: <VerifyAccountPage />,
+    },
+    {
+      path: "forgot-password",
+      element: <ForgotPasswordPage />,
+    },
+    {
+      path: "update-password",
+      element: <UpdatePasswordPage />,
+    },
+  ];
 
-  const routing = useRoutes([homeRoutes, publicRoutes]);
+  const routing = useRoutes([homeRoutes, ...publicRoutes]);
   return (
     <>
       {routing}

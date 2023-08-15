@@ -2,6 +2,7 @@ import * as React from "react";
 import { Avatar, Box, IconButton, Tooltip } from "@mui/material";
 import UserMenu from "./UserMenu";
 import { useAppSelector } from "../../hooks/redux-hooks";
+import { stringAvatar } from "../../utils/stringColor.util";
 
 interface IUserIconProps {}
 
@@ -15,9 +16,11 @@ const UserIcon: React.FunctionComponent<IUserIconProps> = (props) => {
     <Box>
       <Tooltip title="Open user settings">
         <IconButton onClick={(e) => setAnchorUserMenu(e.currentTarget)}>
-          <Avatar src={currUser?.avatar} alt={currUser?.name}>
-            {currUser.name}
-          </Avatar>
+          <Avatar
+            {...stringAvatar(currUser?.name)}
+            src={currUser?.avatar}
+            alt={currUser?.name}
+          />
         </IconButton>
       </Tooltip>
       <UserMenu

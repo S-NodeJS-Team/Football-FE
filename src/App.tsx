@@ -9,6 +9,7 @@ import { ToastContainer } from "react-toastify";
 import VerifyAccountPage from "./pages/VerifyAccountPage";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import UpdatePasswordPage from "./pages/UpdatePasswordPage";
+import AccountSettings from "./pages/AccountSettings";
 
 function App() {
   const homeRoutes = {
@@ -22,6 +23,10 @@ function App() {
       {
         path: "become-organizer",
         element: <BecomeOrganizerPage />,
+      },
+      {
+        path: "account-settings",
+        element: <AccountSettings />,
       },
     ],
   };

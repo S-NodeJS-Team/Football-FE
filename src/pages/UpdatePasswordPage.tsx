@@ -1,22 +1,35 @@
 import * as React from "react";
-import { Box, Container, Stack, TextField, Typography } from "@mui/material";
+import { Box, IconButton, Stack, TextField, Typography } from "@mui/material";
 import { Helmet } from "react-helmet";
 import Loading from "../components/common/Loading";
 import * as Yup from "yup";
 import { Form, useFormik, FormikProvider } from "formik";
 import { toast } from "react-toastify";
 import { LoadingButton } from "@mui/lab";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { IResponse } from "../interfaces/api/api.interface";
+import { updatePasswordService } from "../apis/auth.api";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 interface IUpdatePasswordPageProps {}
 
 const updatePasswordValidation = Yup.object({
   newPassword: Yup.string().required("New password is required"),
-  confirmPassword: Yup.string().required("New password is required"),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref("password")], "Passwords must match")
+    .required("New password is required"),
 });
 
 const UpdatePasswordPage: React.FunctionComponent<IUpdatePasswordPageProps> = (
   props
 ) => {
+  const [queryParameters] = useSearchParams();
+  const verifyToken = queryParameters.get("token");
+  const navigate = useNavigate();
+  const [showPassword, setShowPassword] = React.useState<boolean>(false);
+  const handleShowPassword = () => setShowPassword(!showPassword);
+
   const forgotPasswordFormik = useFormik({
     initialValues: {
       newPassword: "",
@@ -26,6 +39,25 @@ const UpdatePasswordPage: React.FunctionComponent<IUpdatePasswordPageProps> = (
     onSubmit: async (values, actions) => {
       try {
         setIsLoading(true);
+
+        if (!verifyToken) {
+          return;
+        }
+
+        const res: IResponse = await updatePasswordService(
+          values.newPassword,
+          verifyToken
+        );
+
+        if (res.code !== 200) {
+          toast.error(res.message);
+
+          return;
+        }
+
+        toast.success(res.message);
+        setIsLoading(false);
+        navigate("/");
 
         setIsLoading(false);
       } catch (error: any) {
@@ -72,23 +104,52 @@ const UpdatePasswordPage: React.FunctionComponent<IUpdatePasswordPageProps> = (
               <Stack spacing={2}>
                 <TextField
                   label="New Password"
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   {...getFieldProps("newPassword")}
                   error={Boolean(touched.newPassword && errors.newPassword)}
                   helperText={touched.newPassword && errors.newPassword}
                   fullWidth
+                  InputProps={{
+                    endAdornment: (
+                      <IconButton onClick={handleShowPassword}>
+                        {showPassword ? (
+                          <VisibilityOffIcon />
+                        ) : (
+                          <VisibilityIcon />
+                        )}
+                      </IconButton>
+                    ),
+                  }}
                 />
 
                 <TextField
                   label="Confirm Password"
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   {...getFieldProps("confirmPassword")}
-                  error={Boolean(touched.confirmPassword && errors.confirmPassword)}
+                  error={Boolean(
+                    touched.confirmPassword && errors.confirmPassword
+                  )}
                   helperText={touched.confirmPassword && errors.confirmPassword}
                   fullWidth
+                  InputProps={{
+                    endAdornment: (
+                      <IconButton onClick={handleShowPassword}>
+                        {showPassword ? (
+                          <VisibilityOffIcon />
+                        ) : (
+                          <VisibilityIcon />
+                        )}
+                      </IconButton>
+                    ),
+                  }}
                 />
 
-                <LoadingButton variant="contained" fullWidth>
+                <LoadingButton
+                  loading={isSubmitting}
+                  variant="contained"
+                  fullWidth
+                  type="submit"
+                >
                   Update
                 </LoadingButton>
               </Stack>

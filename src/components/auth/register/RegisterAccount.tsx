@@ -36,10 +36,8 @@ const RegisterAccount: React.FunctionComponent<IRegisterAccountProps> = (
 
           return;
         }
-        
 
         const { confirmPassword, ...signUpPayload } = values;
-
         const res: IResponse = await signUpService(signUpPayload);
 
         if (res.code !== 200) {

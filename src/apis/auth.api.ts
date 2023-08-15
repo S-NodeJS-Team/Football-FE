@@ -14,9 +14,14 @@ export const verifyAccountService = async (verifyToken: string) => {
 };
 
 export const forgotPasswordService = async (email: string) => {
-  return await axios.post("auth/forgot-password", email);
+  return await axios.post("auth/forgot-password", { email });
 };
 
-export const updatePasswordService = async (newPassword: string) => {
-  return axios.patch("auth/reset-password", newPassword);
+export const updatePasswordService = async (
+  newPassword: string,
+  verifyToken: string
+) => {
+  return axios.patch(`auth/reset-password?token=${verifyToken}`, {
+    newPassword,
+  });
 };

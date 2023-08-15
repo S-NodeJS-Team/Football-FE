@@ -17,6 +17,10 @@ function App() {
     element: <PublicPage />,
     children: [
       {
+        path: "home",
+        element: <RegisterPage />,
+      },
+      {
         path: "register",
         element: <RegisterPage />,
       },
@@ -41,7 +45,7 @@ function App() {
       element: <ForgotPasswordPage />,
     },
     {
-      path: "update-password",
+      path: "auth/reset-password",
       element: <UpdatePasswordPage />,
     },
   ];

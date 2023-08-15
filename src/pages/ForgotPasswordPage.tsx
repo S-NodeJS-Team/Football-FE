@@ -6,6 +6,8 @@ import * as Yup from "yup";
 import { Form, useFormik, FormikProvider } from "formik";
 import { toast } from "react-toastify";
 import { LoadingButton } from "@mui/lab";
+import { forgotPasswordService } from "../apis/auth.api";
+import { IResponse } from "../interfaces/api/api.interface";
 
 interface IForgotPasswordPageProps {}
 
@@ -24,6 +26,16 @@ const ForgotPasswordPage: React.FunctionComponent<IForgotPasswordPageProps> = (
       try {
         setIsLoading(true);
 
+        const res: IResponse = await forgotPasswordService(values.email);
+        if (res.code !== 200) {
+          toast.error(res.message);
+
+          return;
+        }
+
+        toast.success(res.message);
+
+        actions.resetForm();
         setIsLoading(false);
       } catch (error: any) {
         const { message } = error.response.data;
@@ -76,7 +88,12 @@ const ForgotPasswordPage: React.FunctionComponent<IForgotPasswordPageProps> = (
                   fullWidth
                 />
 
-                <LoadingButton variant="contained" fullWidth>
+                <LoadingButton
+                  loading={isSubmitting}
+                  variant="contained"
+                  fullWidth
+                  type="submit"
+                >
                   Send
                 </LoadingButton>
               </Stack>

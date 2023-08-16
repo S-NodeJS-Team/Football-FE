@@ -10,6 +10,7 @@ import VerifyAccountPage from "./pages/VerifyAccountPage";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import UpdatePasswordPage from "./pages/UpdatePasswordPage";
 import AccountSettings from "./pages/AccountSettings";
+import HomePage from "./pages/HomePage";
 
 function App() {
   const homeRoutes = {
@@ -17,8 +18,8 @@ function App() {
     element: <PublicPage />,
     children: [
       {
-        path: "home",
-        element: <RegisterPage />,
+        path: "",
+        element: <HomePage />,
       },
       {
         path: "register",

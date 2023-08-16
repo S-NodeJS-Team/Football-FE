@@ -17,7 +17,7 @@ interface IUpdatePasswordPageProps {}
 const updatePasswordValidation = Yup.object({
   newPassword: Yup.string().required("New password is required"),
   confirmPassword: Yup.string()
-    .oneOf([Yup.ref("password")], "Passwords must match")
+    .oneOf([Yup.ref("newPassword")], "Passwords must match")
     .required("New password is required"),
 });
 

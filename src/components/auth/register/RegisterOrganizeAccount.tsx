@@ -60,7 +60,7 @@ const RegisterOrganizerAccount: React.FunctionComponent<
           onChange={() =>
             setFieldValue("acceptTerm", !Boolean(values.acceptTerm))
           }
-          label="Agree to become a home-owner"
+          label="Agree to become a organize"
         />
 
         <FormHelperText sx={{ color: "red" }}>

@@ -15,10 +15,23 @@ const generalInfosFormValidation = Yup.object({
 });
 
 const GeneralInfos: React.FunctionComponent<IGeneralInfosProps> = (props) => {
+  const [file, setFile] = React.useState(null);
+  const [image, setImage] = React.useState<null | string>(null);
+  const accept: any = "image/*";
   const onDrop = React.useCallback((acceptedFiles: any) => {
-    // Do something with the files
+    const file = acceptedFiles[0];
+
+    if (!file) {
+      return;
+    }
+    setFile(file);
+    setImage(URL.createObjectURL(file));
   }, []);
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept,
+    multiple: false,
+  });
 
   const generalInfoFormik = useFormik({
     validationSchema: generalInfosFormValidation,
@@ -74,15 +87,21 @@ const GeneralInfos: React.FunctionComponent<IGeneralInfosProps> = (props) => {
                   width: 150,
                   height: 150,
                 }}
+                src={image ? image : ""}
               />
 
               <div {...getRootProps()}>
                 <input {...getInputProps()} />
                 {isDragActive ? (
-                  <p>Drop the files here ...</p>
+                  <p style={{ color: "green" }}>Drop the files here ...</p>
                 ) : (
-                  <p>Drag 'n' drop some files here, or click to select files</p>
+                  <p>
+                    Drag 'n' drop your new avatar here, or click to select file
+                  </p>
                 )}
+                <em>
+                  Images with *.jpeg, *.png, *.jpg extensions will be accepted
+                </em>
               </div>
             </Box>
           </Grid>

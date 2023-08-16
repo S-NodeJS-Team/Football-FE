@@ -3,6 +3,7 @@ import * as React from "react";
 import UpdatePassword from "../components/auth/profile/UpdatePassword";
 import GeneralInfos from "../components/auth/profile/GeneralInfos";
 import Skills from "../components/auth/profile/Skills";
+import { toast } from "react-toastify";
 
 interface IAccountSettingsProps {}
 
@@ -42,6 +43,26 @@ const AccountSettings: React.FunctionComponent<IAccountSettingsProps> = (
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
+
+  React.useEffect(() => {
+    const fetchUserProfiles = async () => {
+      try {
+        
+      } catch (error: any) {
+        const { message } = error.response.data;
+
+        if (Array.isArray(message)) {
+          message.forEach((element: String) => {
+            toast.error(element);
+          });
+        }
+
+        toast.error(message);
+      }
+    };
+
+    fetchUserProfiles();
+  }, []);
 
   return (
     <Box sx={{ my: 10, mx: 5 }}>

@@ -15,23 +15,9 @@ const generalInfosFormValidation = Yup.object({
 });
 
 const GeneralInfos: React.FunctionComponent<IGeneralInfosProps> = (props) => {
-  const [file, setFile] = React.useState(null);
+  const [file, setFile] = React.useState<File | null>(null);
   const [image, setImage] = React.useState<null | string>(null);
   const accept: any = "image/*";
-  const onDrop = React.useCallback((acceptedFiles: any) => {
-    const file = acceptedFiles[0];
-
-    if (!file) {
-      return;
-    }
-    setFile(file);
-    setImage(URL.createObjectURL(file));
-  }, []);
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    onDrop,
-    accept,
-    multiple: false,
-  });
 
   const generalInfoFormik = useFormik({
     validationSchema: generalInfosFormValidation,
@@ -43,11 +29,32 @@ const GeneralInfos: React.FunctionComponent<IGeneralInfosProps> = (props) => {
     },
     onSubmit: async (values, actions) => {
       try {
+        if (!file) {
+          return;
+        }
+
+        
       } catch (error) {}
     },
   });
 
-  const { handleSubmit, getFieldProps } = generalInfoFormik;
+  const { handleSubmit, getFieldProps, setFieldValue } = generalInfoFormik;
+
+  const onDrop = React.useCallback((acceptedFiles: any) => {
+    const file = acceptedFiles[0];
+
+    if (!file) {
+      return;
+    }
+    setFile(file);
+    setImage(URL.createObjectURL(file));
+    setFieldValue("avatar", URL.createObjectURL(file));
+  }, []);
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept,
+    multiple: false,
+  });
 
   return (
     <FormikProvider value={generalInfoFormik}>
@@ -107,7 +114,9 @@ const GeneralInfos: React.FunctionComponent<IGeneralInfosProps> = (props) => {
           </Grid>
         </Grid>
 
-        <LoadingButton variant="contained">Update</LoadingButton>
+        <LoadingButton variant="contained" type="submit">
+          Update
+        </LoadingButton>
       </Form>
     </FormikProvider>
   );

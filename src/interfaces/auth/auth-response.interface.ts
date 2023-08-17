@@ -1,9 +1,10 @@
 import { IResponse } from "../api/api.interface";
+import { IUser } from "../user";
 
 export interface ISignInResponse extends IResponse {
   data: {
     access_token: string;
-    user: object;
+    user: IUser;
   };
 }
 

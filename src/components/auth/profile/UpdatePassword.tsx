@@ -3,6 +3,13 @@ import * as Yup from "yup";
 import { Form, useFormik, FormikProvider } from "formik";
 import { Stack, TextField } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
+import { toast } from "react-toastify";
+import { IUpdateUserResponse } from "../../../interfaces/user";
+import { updateUserService } from "../../../apis/user.api";
+import {
+  handleErrorMessage,
+  handleSuccessMessage,
+} from "../../../utils/message-handle.util";
 
 interface IUpdatePasswordProps {}
 
@@ -22,7 +29,22 @@ const UpdatePassword: React.FunctionComponent<IUpdatePasswordProps> = (
     validationSchema: updatePasswordFormValidation,
     onSubmit: async (values, actions) => {
       try {
-      } catch (error) {}
+        const { newPassword, confirmPassword } = values;
+
+        if (confirmPassword !== newPassword) {
+          toast.error("Password not match");
+
+          return;
+        }
+
+        const res: IUpdateUserResponse = await updateUserService({
+          password: newPassword,
+        });
+
+        handleSuccessMessage(res, toast);
+      } catch (error: any) {
+        handleErrorMessage(error, toast);
+      }
     },
   });
 
@@ -50,7 +72,12 @@ const UpdatePassword: React.FunctionComponent<IUpdatePasswordProps> = (
           />
         </Stack>
 
-        <LoadingButton variant="contained" loading={isSubmitting} type="submit">
+        <LoadingButton
+          disabled={!dirty}
+          variant="contained"
+          loading={isSubmitting}
+          type="submit"
+        >
           Update
         </LoadingButton>
       </Form>

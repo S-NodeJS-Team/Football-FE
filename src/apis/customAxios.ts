@@ -15,7 +15,7 @@ customAxios.interceptors.request.use(
       return config;
     }
 
-    if (currUser && currUser.accessToken) {
+    if (currUser) {
       config.headers.Authorization = `Bearer ${currUser}`;
     }
 

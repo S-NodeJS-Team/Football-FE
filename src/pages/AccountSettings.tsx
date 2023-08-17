@@ -47,7 +47,6 @@ const AccountSettings: React.FunctionComponent<IAccountSettingsProps> = (
   React.useEffect(() => {
     const fetchUserProfiles = async () => {
       try {
-        
       } catch (error: any) {
         const { message } = error.response.data;
 

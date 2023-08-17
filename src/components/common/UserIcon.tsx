@@ -14,15 +14,17 @@ const UserIcon: React.FunctionComponent<IUserIconProps> = (props) => {
 
   return (
     <Box>
-      <Tooltip title="Open user settings">
-        <IconButton onClick={(e) => setAnchorUserMenu(e.currentTarget)}>
-          <Avatar
-            {...stringAvatar(currUser?.name)}
-            src={currUser?.avatar}
-            alt={currUser?.name}
-          />
-        </IconButton>
-      </Tooltip>
+      {currUser && (
+        <Tooltip title="Open user settings">
+          <IconButton onClick={(e) => setAnchorUserMenu(e.currentTarget)}>
+            <Avatar
+              {...stringAvatar(currUser?.name)}
+              src={currUser?.avatar || ""}
+              alt={currUser?.name}
+            />
+          </IconButton>
+        </Tooltip>
+      )}
       <UserMenu
         anchorUserMenu={anchorUserMenu}
         setAnchorUserMenu={setAnchorUserMenu}

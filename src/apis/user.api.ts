@@ -1,11 +1,12 @@
+import { IUpdateUser } from "../interfaces/user";
 import axios from "./customAxios";
 
 export const getUserProfileService = async () => {
-  return await axios.get("user/profile");
+  return await axios.get("user/get-user");
 };
 
-export const updateUser = async () => {
-  return await axios.patch("user/update");
+export const updateUserService = async (updateUserPayload : IUpdateUser) => {
+  return await axios.patch("user/update-user", updateUserPayload);
 };
 
 

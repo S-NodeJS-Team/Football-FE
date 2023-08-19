@@ -70,7 +70,7 @@ const Skills: React.FunctionComponent<ISkillsProps> = (props) => {
   const initialValues = chartData
     ? chartData.reduce((result: any, item: IUserSkill) => {
         result[item.subject] = item.point;
-        return result;
+      return result;
       }, {})
     : {
         defending: 1,

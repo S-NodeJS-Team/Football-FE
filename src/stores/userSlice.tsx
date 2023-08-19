@@ -3,10 +3,14 @@ import { IUser } from "../interfaces/user";
 
 export interface UserInitialState {
   currUser: IUser | null;
+  players: IUser[];
+  countPlayers: number | null;
 }
 
 const initialState: UserInitialState = {
   currUser: null,
+  players: [],
+  countPlayers: null,
 };
 
 export const userSlice = createSlice({
@@ -23,9 +27,22 @@ export const userSlice = createSlice({
     updateUser: (state: UserInitialState, action: PayloadAction<IUser>) => {
       state.currUser = action.payload;
     },
+    updatePlayers: (
+      state: UserInitialState,
+      action: PayloadAction<IUser[]>
+    ) => {
+      state.players = action.payload;
+    },
+    updateCountPlayers: (
+      state: UserInitialState,
+      action: PayloadAction<number>
+    ) => {
+      state.countPlayers = action.payload;
+    },
   },
 });
 
-export const { login, logout, updateUser } = userSlice.actions;
+export const { login, logout, updateUser, updatePlayers, updateCountPlayers } =
+  userSlice.actions;
 
 export default userSlice.reducer;

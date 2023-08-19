@@ -4,6 +4,7 @@ import UpdatePassword from "../components/auth/profile/UpdatePassword";
 import GeneralInfos from "../components/auth/profile/GeneralInfos";
 import Skills from "../components/auth/profile/Skills";
 import { toast } from "react-toastify";
+import PlayerPosition from "../components/auth/profile/PlayerPosition";
 
 interface IAccountSettingsProps {}
 
@@ -74,7 +75,8 @@ const AccountSettings: React.FunctionComponent<IAccountSettingsProps> = (
       >
         <Tab value={0} label="General" />
         <Tab value={1} label="Skills" />
-        <Tab value={2} label="Password" />
+        <Tab value={2} label="Positions" />
+        <Tab value={3} label="Password" />
       </Tabs>
 
       <Box sx={{ my: 3 }}>
@@ -85,6 +87,9 @@ const AccountSettings: React.FunctionComponent<IAccountSettingsProps> = (
           <Skills />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={2}>
+          <PlayerPosition />
+        </CustomTabPanel>
+        <CustomTabPanel value={value} index={3}>
           <UpdatePassword />
         </CustomTabPanel>
       </Box>

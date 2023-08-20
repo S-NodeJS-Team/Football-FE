@@ -6,6 +6,6 @@ export interface IUpdateUser {
   avatar?: string | null;
   password?: string;
   phoneNumber?: string | null;
-  skills?: IUserSkill[]
+  skills?: IUserSkill[];
+  position?: string[];
 }
-

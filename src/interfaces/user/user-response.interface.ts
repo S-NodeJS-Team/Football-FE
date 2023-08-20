@@ -7,8 +7,8 @@ export interface IUser {
   email: string;
   avatar: string | null;
   skills: IUserSkill[] | [];
+  position: string[] | [];
   rating: string | null;
-  position: string[] | null;
   teamId: string | null;
   tournamentIds: string[] | null;
 }
@@ -16,5 +16,12 @@ export interface IUser {
 export interface IUpdateUserResponse extends IResponse {
   data: {
     user: IUser;
+  };
+}
+
+export interface IGetPlayersResponse extends IResponse {
+  data: {
+    players: IUser[];
+    count: number;
   };
 }

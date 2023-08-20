@@ -2,12 +2,12 @@ import * as React from "react";
 import {
   AppBar,
   Button,
-  Container,
   IconButton,
   Toolbar,
   Typography,
   Stack,
   Tooltip,
+  Box,
 } from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock";
 import { useNavigate } from "react-router-dom";
@@ -21,18 +21,17 @@ import RegisterMenu from "./auth/register/RegisterMenu";
 
 interface INavBarProps {}
 
-
 const NavBar: React.FunctionComponent<INavBarProps> = (props) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const currUser = useAppSelector((state) => state.user.currUser)
+  const currUser = useAppSelector((state) => state.user.currUser);
 
   const [anchorUserMenu, setAnchorUserMenu] =
     React.useState<null | HTMLElement>(null);
   return (
     <>
-      <AppBar>
-        <Container maxWidth="lg">
+      <AppBar color="default">
+        <Box sx={{ mx: 5 }}>
           <Toolbar disableGutters>
             <Tooltip title="Click here to go Home page">
               <IconButton
@@ -44,20 +43,26 @@ const NavBar: React.FunctionComponent<INavBarProps> = (props) => {
               </IconButton>
             </Tooltip>
 
-            <Typography
-              variant="h6"
-              component="h1"
-              noWrap
-              sx={{
-                flexGrow: 1,
-                display: {
-                  xs: "none",
-                  md: "flex",
-                },
-              }}
-            >
-              You are Welcome
-            </Typography>
+            <Stack flexGrow="1" direction="row" alignItems="center" spacing={3}>
+              <Typography
+                variant="h6"
+                component="h1"
+                noWrap
+                sx={{
+                  display: {
+                    xs: "none",
+                    md: "flex",
+                  },
+                }}
+              >
+                You are Welcome
+              </Typography>
+
+              <Stack direction="row" spacing={1}>
+                <Button color="inherit">News</Button>
+                <Button color="inherit">Results</Button>
+              </Stack>
+            </Stack>
 
             <Typography
               variant="h6"
@@ -89,7 +94,7 @@ const NavBar: React.FunctionComponent<INavBarProps> = (props) => {
               <UserIcon />
             )}
           </Toolbar>
-        </Container>
+        </Box>
       </AppBar>
       <RegisterMenu
         anchorUserMenu={anchorUserMenu}

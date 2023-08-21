@@ -3,6 +3,7 @@ import * as React from "react";
 import ComingMatch from "../components/match/ComingMatch";
 import LiveMatch from "../components/match/LiveMatch";
 import MatchesTable from "../components/match/MatchesTable";
+import TeamsList from "../components/team/TeamsList";
 
 interface IHomePageProps {}
 
@@ -23,7 +24,7 @@ const HomePage: React.FunctionComponent<IHomePageProps> = (props) => {
   ];
 
   return (
-    <Box sx={{ my: 10, mx: 5, backgroundColor: '#F6F6F4' }}>
+    <Box sx={{ my: 10, mx: 5}}>
       <Grid container>
         <Grid item xs={12} md={7} lg={8}>
           <ComingMatch />
@@ -49,7 +50,8 @@ const HomePage: React.FunctionComponent<IHomePageProps> = (props) => {
 
       <Box sx={{ my: 2 }}>
         <MatchesTable />
-        <Divider />
+        <Divider sx={{ my: 2 }} />
+        <TeamsList />
       </Box>
     </Box>
   );

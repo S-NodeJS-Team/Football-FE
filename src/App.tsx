@@ -1,5 +1,4 @@
 import React from "react";
-import "./App.css";
 import PublicPage from "./layout/PublicPage";
 import { useRoutes } from "react-router-dom";
 import RegisterPage from "./pages/RegisterPage";
@@ -11,6 +10,8 @@ import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import UpdatePasswordPage from "./pages/UpdatePasswordPage";
 import AccountSettings from "./pages/AccountSettings";
 import HomePage from "./pages/HomePage";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 function App() {
   const homeRoutes = {

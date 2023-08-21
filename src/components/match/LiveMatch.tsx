@@ -42,11 +42,17 @@ const LiveMatch: React.FunctionComponent<ILiveMatchProps> = (props) => {
 
           <Stack direction="row" spacing={2}>
             <LinearProgress
+              variant="determinate"
               color="secondary"
               value={50}
               sx={{ width: "100%" }}
             />
-            <LinearProgress color="success" value={76} sx={{ width: "100%" }} />
+            <LinearProgress
+              variant="determinate"
+              color="success"
+              value={76}
+              sx={{ width: "100%", transform: "scaleX(-1)" }}
+            />
           </Stack>
         </Stack>
 
@@ -55,11 +61,17 @@ const LiveMatch: React.FunctionComponent<ILiveMatchProps> = (props) => {
 
           <Stack direction="row" spacing={2}>
             <LinearProgress
+              variant="determinate"
               color="secondary"
               value={50}
               sx={{ width: "100%" }}
             />
-            <LinearProgress color="success" value={76} sx={{ width: "100%" }} />
+            <LinearProgress
+              variant="determinate"
+              color="success"
+              value={76}
+              sx={{ width: "100%", transform: "scaleX(-1)" }}
+            />
           </Stack>
         </Stack>
 
@@ -68,11 +80,20 @@ const LiveMatch: React.FunctionComponent<ILiveMatchProps> = (props) => {
 
           <Stack direction="row" spacing={2}>
             <LinearProgress
+              variant="determinate"
               color="secondary"
-              value={50}
+              value={35}
               sx={{ width: "100%" }}
             />
-            <LinearProgress color="success" value={76} sx={{ width: "100%" }} />
+            <LinearProgress
+              variant="determinate"
+              color="success"
+              value={46}
+              sx={{
+                width: "100%",
+                transform: "scaleX(-1)",
+              }}
+            />
           </Stack>
         </Stack>
       </Stack>

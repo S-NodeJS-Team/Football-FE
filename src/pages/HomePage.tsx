@@ -1,17 +1,8 @@
-import {
-  Avatar,
-  Box,
-  Grid,
-  LinearProgress,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Divider, Grid } from "@mui/material";
 import * as React from "react";
-import MatchCard from "../components/match/MatchCard";
-import PlayersTable from "../components/player/PlayersTable";
-import CountDown from "../components/common/CountDown";
 import ComingMatch from "../components/match/ComingMatch";
 import LiveMatch from "../components/match/LiveMatch";
+import MatchesTable from "../components/match/MatchesTable";
 
 interface IHomePageProps {}
 
@@ -32,18 +23,18 @@ const HomePage: React.FunctionComponent<IHomePageProps> = (props) => {
   ];
 
   return (
-    <Box sx={{ my: 10, mx: 5 }}>
+    <Box sx={{ my: 10, mx: 5, backgroundColor: '#F6F6F4' }}>
       <Grid container>
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} md={7} lg={8}>
           <ComingMatch />
         </Grid>
 
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} md={5} lg={4}>
           <LiveMatch />
         </Grid>
       </Grid>
 
-      <Box>
+      {/* <Box>
         <Typography variant="h5">Matches List</Typography>
         <Grid container spacing={2}>
           {matches.map((match) => {
@@ -54,11 +45,11 @@ const HomePage: React.FunctionComponent<IHomePageProps> = (props) => {
             );
           })}
         </Grid>
-      </Box>
+      </Box> */}
 
       <Box sx={{ my: 2 }}>
-        <Typography variant="h5">Players</Typography>
-        <PlayersTable />
+        <MatchesTable />
+        <Divider />
       </Box>
     </Box>
   );

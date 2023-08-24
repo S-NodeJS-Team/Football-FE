@@ -12,6 +12,7 @@ import AccountSettings from "./pages/AccountSettings";
 import HomePage from "./pages/HomePage";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import PlayerHomePage from "./pages/player/PlayerHomePage";
 
 function App() {
   const homeRoutes = {
@@ -33,6 +34,10 @@ function App() {
       {
         path: "account-settings",
         element: <AccountSettings />,
+      },
+      {
+        path: "players",
+        element: <PlayerHomePage />,
       },
     ],
   };

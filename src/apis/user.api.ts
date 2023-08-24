@@ -11,6 +11,8 @@ export const updateUserService = async (updateUserPayload: IUpdateUser) => {
   return await axios.patch("user/update-user", updateUserPayload);
 };
 
-export const getPlayersService = async (getPlayersParams: IQueryParams) => {
+export const getPlayersService = async (
+  getPlayersParams: IQueryParams = {}
+) => {
   return await axios.get("user/get-players", { params: getPlayersParams });
 };

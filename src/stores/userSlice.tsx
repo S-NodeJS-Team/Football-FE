@@ -5,12 +5,19 @@ export interface UserInitialState {
   currUser: IUser | null;
   players: IUser[];
   countPlayers: number | null;
+  playersFilterDialog: boolean;
+  positionsFilter: string[];
+
+  playerDetails: IUser | null;
 }
 
 const initialState: UserInitialState = {
   currUser: null,
   players: [],
   countPlayers: null,
+  playersFilterDialog: false,
+  positionsFilter: [],
+  playerDetails: null,
 };
 
 export const userSlice = createSlice({
@@ -39,10 +46,33 @@ export const userSlice = createSlice({
     ) => {
       state.countPlayers = action.payload;
     },
+    updatePlayersFilterDialog: (state: UserInitialState) => {
+      state.playersFilterDialog = !state.playersFilterDialog;
+    },
+    updatePositionsFilter: (
+      state: UserInitialState,
+      action: PayloadAction<string[]>
+    ) => {
+      state.positionsFilter = action.payload;
+    },
+    updatePlayerDetails: (
+      state: UserInitialState,
+      action: PayloadAction<IUser>
+    ) => {
+      state.playerDetails = action.payload;
+    },
   },
 });
 
-export const { login, logout, updateUser, updatePlayers, updateCountPlayers } =
-  userSlice.actions;
+export const {
+  login,
+  logout,
+  updateUser,
+  updatePlayers,
+  updateCountPlayers,
+  updatePlayersFilterDialog,
+  updatePositionsFilter,
+  updatePlayerDetails,
+} = userSlice.actions;
 
 export default userSlice.reducer;

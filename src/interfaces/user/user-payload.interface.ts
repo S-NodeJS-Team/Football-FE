@@ -13,3 +13,7 @@ export interface IUpdateUser {
 export interface IUserQuery extends IQueryParams {
   name?: string;
 }
+
+export interface IUserFilter {
+  positions?: string[]
+}

@@ -13,6 +13,7 @@ import HomePage from "./pages/HomePage";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import PlayerHomePage from "./pages/player/PlayerHomePage";
+import PlayerDetailsPage from "./pages/player/PlayerDetailsPage";
 
 function App() {
   const homeRoutes = {
@@ -35,9 +36,20 @@ function App() {
         path: "account-settings",
         element: <AccountSettings />,
       },
+    ],
+  };
+
+  const playerRoutes = {
+    path: "/players",
+    element: <PublicPage />,
+    children: [
       {
-        path: "players",
+        path: "",
         element: <PlayerHomePage />,
+      },
+      {
+        path: ":playerId",
+        element: <PlayerDetailsPage />,
       },
     ],
   };
@@ -57,7 +69,7 @@ function App() {
     },
   ];
 
-  const routing = useRoutes([homeRoutes, ...publicRoutes]);
+  const routing = useRoutes([homeRoutes, ...publicRoutes, playerRoutes]);
   return (
     <>
       {routing}

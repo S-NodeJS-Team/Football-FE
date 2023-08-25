@@ -7,8 +7,13 @@ interface IPlayerCardProps {
 }
 
 const PlayerCard: React.FunctionComponent<IPlayerCardProps> = ({ player }) => {
+  const handleOpenPlayerDetails = () => {
+    window.open(`players/${player.id}`, "_blank");
+  };
+
   return (
     <Stack
+      onClick={handleOpenPlayerDetails}
       sx={{
         mb: 10,
         width: 300,

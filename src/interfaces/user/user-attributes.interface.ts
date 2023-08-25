@@ -11,6 +11,12 @@ export interface IUserPosition {
   checked: boolean;
 }
 
+export interface IUserSubSkill {
+  subject: string;
+  point: number;
+  fullMark: number;
+}
+
 export const positionsList: IUserPosition[] = [
   { id: "gk", shortName: "GK", name: "Goalkeeper", checked: false },
   { id: "lf", shortName: "LF", name: "Left forward", checked: false },
@@ -136,5 +142,43 @@ export const positionsList: IUserPosition[] = [
     shortName: "LCAM",
     name: "Left central attacking midfielder",
     checked: false,
+  },
+];
+
+export const skillChartData: IUserSubSkill[] = [
+  {
+    subject: "defending",
+    point: 0,
+    fullMark: 100,
+  },
+  {
+    subject: "physical",
+    point: 0,
+    fullMark: 100,
+  },
+  {
+    subject: "passing",
+    point: 0,
+    fullMark: 100,
+  },
+  {
+    subject: "vision",
+    point: 0,
+    fullMark: 100,
+  },
+  {
+    subject: "attacking",
+    point: 0,
+    fullMark: 100,
+  },
+  {
+    subject: "dribbling",
+    point: 0,
+    fullMark: 100,
+  },
+  {
+    subject: "heading",
+    point: 0,
+    fullMark: 100,
   },
 ];

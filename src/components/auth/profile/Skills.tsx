@@ -19,6 +19,7 @@ import {
   handleErrorMessage,
   handleSuccessMessage,
 } from "../../../utils/message-handle.util";
+import PlayerSkillChart from "../../common/player/PlayerSkillChart";
 
 interface ISkillsProps {}
 
@@ -70,7 +71,7 @@ const Skills: React.FunctionComponent<ISkillsProps> = (props) => {
   const initialValues = chartData
     ? chartData.reduce((result: any, item: IUserSkill) => {
         result[item.subject] = item.point;
-      return result;
+        return result;
       }, {})
     : {
         defending: 1,
@@ -159,25 +160,7 @@ const Skills: React.FunctionComponent<ISkillsProps> = (props) => {
             </Grid>
 
             <Grid item xs={12} md={8}>
-              <ResponsiveContainer width="100%" aspect={3}>
-                <RadarChart
-                  cx="50%"
-                  cy="50%"
-                  outerRadius="80%"
-                  data={chartData}
-                >
-                  <PolarGrid />
-                  <PolarAngleAxis dataKey="subject" />
-                  <PolarRadiusAxis />
-                  <Radar
-                    name="Mike"
-                    dataKey="point"
-                    stroke="#000000"
-                    fill="#5FFBF1"
-                    fillOpacity={0.6}
-                  />
-                </RadarChart>
-              </ResponsiveContainer>
+              <PlayerSkillChart chartData={chartData} />
             </Grid>
           </Grid>
         </Form>

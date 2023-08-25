@@ -60,7 +60,7 @@ const NavBar: React.FunctionComponent<INavBarProps> = (props) => {
 
               <Stack direction="row" spacing={1}>
                 <Button color="inherit">News</Button>
-                <Button color="inherit">Results</Button>
+                <Button color="inherit" onClick={() => navigate('/players')}>Players</Button>
               </Stack>
             </Stack>
 
